@@ -1,0 +1,19 @@
+nav {
+    height: 100%;
+
+
+}
+
+.side-bar{
+    width: 100px;
+    border: 1px solid black;
+    position: fixed;
+    z-index: 10;
+}
+
+a, a:visited, a:hover, a:active {
+    display: block;
+	color: black;
+	text-decoration: none;
+    padding: 10px;
+  }

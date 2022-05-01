@@ -11,14 +11,17 @@ function NewProjectPage({ admin }){
         }
     }
 
-    console.log(isPersonal())
+
     
     function handleAddProject(e) {
         e.preventDefault()
 
+        const personal = isPersonal()
+
+
         const projectToAdd = {
             project : projectName,
-            personal : isPersonal()
+            personal : personal
         }
 
 
@@ -29,8 +32,29 @@ function NewProjectPage({ admin }){
             },
             body : JSON.stringify(projectToAdd)
         })
+        .then(r => r.json())
+        .then(r => {
+            if (personal) {
+                fetch('/projectuserspersonal', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify({
+                        project: r.id
+                    })
+                }).then(r => {
+                    if(r.ok) {
+                        console.log(e)
+                        setProjectName("")
+                    }
+                })
+            } else {
+                setProjectName("")
+            }
+        })
 
-        setProjectName("")
+       
 
     }
 

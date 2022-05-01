@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 
     def show
         project = Project.find(params[:id])
-        render json: project, include: [:deliverables, :users]
+        render json: project, include: [:deliverables, :users, :notes]
     end
 
     def admin
@@ -15,6 +15,7 @@ class ProjectsController < ApplicationController
 
     def create
         project = Project.create!(project_name: params[:project], is_personal: params[:personal])
+        render json: project, stauts: :ok
     end
         
 

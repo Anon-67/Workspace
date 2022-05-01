@@ -26,7 +26,9 @@ function NavBar({ user, setUser }) {
                     <Link to="/resources">Resources</Link>
                     <Link to="/messages">Messages</Link>
                     {user.is_admin ? <Link to="/admin">Admin</Link> : null}
-                    <button onClick={handleLogoutClick}>logout</button>
+                    <Link to="/">
+                        <button onClick={handleLogoutClick}>logout</button>
+                    </Link>
                 </nav>
             ) : (null)}
         </>

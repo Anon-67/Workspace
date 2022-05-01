@@ -38,9 +38,9 @@ function Login({ setUser }) {
                             <button type="submit">login</button>
                         </div>
                     </form>
-                    {/* <div class="card-info">
+                    <div class="card-info">
                         <p>No account?<a href="/submit">Create a new account</a></p>
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </>

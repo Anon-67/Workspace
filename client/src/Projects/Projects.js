@@ -2,7 +2,7 @@ import React, { useEffect,  useState } from "react";
 import ProjectItem from "./ProjectItem";
 import { Link } from "react-router-dom"
 
-function Projects({ admin, setProject, clarification, personal }) {
+function Projects({  setProject, clarification }) {
     const [projects, setProjects] = useState([])
 
 

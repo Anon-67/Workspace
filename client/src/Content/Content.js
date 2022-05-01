@@ -7,6 +7,7 @@ import Project from "../Projects/Project";
 import Projects from "../Projects/Projects";
 import Resources from "../Resources/Resources";
 import NavBar from "../Sidebar/Navbar";
+import Signup from "../Signup/Signup";
 import "./Content.css"
 
 
@@ -15,7 +16,7 @@ function Content({ user, setUser }) {
     const [project, setProject] = useState({})
     const [adminProject, setAdminProject] = useState([])
     const [refresh, setRefresh] = useState(true)
-    
+
 
 
     return (
@@ -33,13 +34,16 @@ function Content({ user, setUser }) {
                             <Route path="resources" element={<Resources />} />
                             {user.is_admin ? <Route path="admin" element={<Admin adminProject={adminProject} setAdminProject={setAdminProject} />} /> : null}
                             <Route path="projects/:id" element={<Project project={project} />} />
-                            <Route path="admin/projects/:id" element={<Project admin={true} project={adminProject} refresh={refresh} setRefresh={setRefresh}/>} />
-                            <Route path="/adminnewproject" element={<NewProjectPage admin={true}/>} />
+                            <Route path="admin/projects/:id" element={<Project admin={true} project={adminProject} refresh={refresh} setRefresh={setRefresh} />} />
+                            <Route path="/adminnewproject" element={<NewProjectPage admin={true} />} />
                             <Route path="/newpersonalproject" element={<NewProjectPage admin={false} />} />
+
                         </>
                     ) : (
-                        <Route path="/" element={<LandingPage user={user} setUser={setUser} />} />
-
+                        <>
+                            <Route path="/" element={<LandingPage user={user} setUser={setUser} />} />
+                            <Route path="submit" element={<Signup user={user} setUser={setUser} />} />
+                        </>
                     )}
 
                 </Routes>

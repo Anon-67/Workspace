@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :notes
+  resources :notes, only: [:create]
   resources :resources, only: [:index, :create]
   resources :project_users, only: [:create]
   resources :deliverables, only: [:create, :update]
@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   get "/projects/:id/deliverables", to: "projects#deliverables"
   get "/adminprojects", to: "projects#admin"
+
+  post "/projectuserspersonal", to: "project_users#personal"
 
 
 

@@ -2,22 +2,24 @@ import React, { useEffect, useState } from "react";
 import Contributors from "./Contributors/Contributors";
 import Deliverables from "./Deliverables/Deliverables";
 import "./Projects.css"
-import { useParams } from "react-router-dom"
+import { useSelector } from "react-redux"
 
-function Project({ admin, project, refresh, setRefresh }) {
+function Project({ admin }) {
     const [deliverable, setDeliverable] = useState("")
     const [allUsers, setAllUsers] = useState([])
     const [userToAdd, setUserToAdd] = useState({})
     const [note, setNote] = useState("")
+    const activeProject = useSelector(state => state.projects.activeProject)
 
 
-    const { id } = useParams()
+
+
 
     function handleAddContributor(e) {
         e.preventDefault()
 
         const projectUser = {
-            project: project.id,
+            project: activeProject.id,
             user: userToAdd
         }
 
@@ -28,8 +30,6 @@ function Project({ admin, project, refresh, setRefresh }) {
             },
             body: JSON.stringify(projectUser)
         })
-            .then(setRefresh(refresh => !refresh))
-            .then(console.log(refresh))
 
 
     }
@@ -39,7 +39,7 @@ function Project({ admin, project, refresh, setRefresh }) {
 
         const deliverableToAdd = {
             description: deliverable,
-            project: project.id
+            project: activeProject.id
         }
 
         fetch('/deliverables', {
@@ -48,7 +48,7 @@ function Project({ admin, project, refresh, setRefresh }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(deliverableToAdd)
-        })
+        }).then(setDeliverable(""))
     }
 
     useEffect(() => {
@@ -64,7 +64,7 @@ function Project({ admin, project, refresh, setRefresh }) {
         const noteToSend = {
 
             body: note,
-            project: id
+            project: activeProject.id
 
         }
 
@@ -85,14 +85,14 @@ function Project({ admin, project, refresh, setRefresh }) {
 
 
     const userDropdown = allUsers.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
-    const notesMap = project.notes.map((note, index) => <li key={index}>{note.body}</li>)
+    const notesMap = activeProject.notes.map((note, index) => <li key={index}>{note.body}</li>)
 
 
 
 
     return (
         <>
-            <div className="left-side">{project.project_name}
+            <div className="left-side">{activeProject.project_name}
                 {admin ? (
                     <form onSubmit={handleAddContributor}>
                         <select onSubmit={handleAddContributor} onChange={(e) => setUserToAdd(e.target.value)} defaultValue={"DEFAULT"}>
@@ -124,8 +124,8 @@ function Project({ admin, project, refresh, setRefresh }) {
 
             </div>
             <div className="right-side">
-                <Deliverables project={project} />
-                <Contributors project={project} refresh={refresh} />
+                <Deliverables  />
+                <Contributors  />
             </div>
         </>
     )

@@ -1,10 +1,12 @@
 import React from "react";
 import "../Projects.css"
+import { useSelector } from "react-redux"
 
-function Deliverables({ project }) {
+function Deliverables() {
+    const activeProject = useSelector(state => state.projects.activeProject)
 
 
-    const deliverables = project.deliverables.map((deliverable, index) => {
+    const deliverables = activeProject.deliverables.map((deliverable, index) => {
         if (deliverable.is_completed === true) {
             return (
                 <li>

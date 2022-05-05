@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   resources :project_users, only: [:create]
   resources :deliverables, only: [:create, :update]
   resources :projects, only: [:index, :show, :create]
-  resources :users, only: [:index]
+  resources :users, only: [:index, :create, :show]
+
+  resources :conversations, only: [:index, :show, :create]
+  resources :handshakes, only: [:show]
+  resources :messages, only: [:show]
+
+  mount ActionCable.server => "/cable"
 
 
   get "/me", to: "users#show"

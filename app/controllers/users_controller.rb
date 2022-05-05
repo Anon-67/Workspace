@@ -15,8 +15,15 @@ class UsersController < ApplicationController
     end
 
     def index
-        render json: User.all
+        render json: User.includes(:conversations).all
     end
+
+    # def update
+    #     user = User.find(params[:id])
+    #     handshake = user.handshakes.find_by(conversation_id: params[:conversation_id])
+    #     handshake.update(last_read_at: params[:last_read_at])
+    #     render json: HandshakeSerializer.new(handshake, include: [:conversation]).serialized_json
+    #   end
 
     private
 

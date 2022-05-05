@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-function NewProjectPage({ admin }){
+function NewProjectPage({ admin }) {
     const [projectName, setProjectName] = useState("")
 
     function isPersonal() {
-        if (admin === true){
+        if (admin === true) {
             return false
         } else if (admin === false) {
             return true
@@ -12,7 +12,7 @@ function NewProjectPage({ admin }){
     }
 
 
-    
+
     function handleAddProject(e) {
         e.preventDefault()
 
@@ -20,50 +20,45 @@ function NewProjectPage({ admin }){
 
 
         const projectToAdd = {
-            project : projectName,
-            personal : personal
+            project: projectName,
+            personal: personal
         }
 
 
         fetch("/projects", {
             method: "POST",
             headers: {
-                "Content-Type" : "application/json" 
+                "Content-Type": "application/json"
             },
-            body : JSON.stringify(projectToAdd)
+            body: JSON.stringify(projectToAdd)
         })
-        .then(r => r.json())
-        .then(r => {
-            if (personal) {
-                fetch('/projectuserspersonal', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type" : "application/json"
-                    },
-                    body: JSON.stringify({
-                        project: r.id
-                    })
-                }).then(r => {
-                    if(r.ok) {
-                        console.log(e)
-                        setProjectName("")
-                    }
-                })
-            } else {
-                setProjectName("")
-            }
-        })
+            .then(r => r.json())
+            .then(r => {
+                if (personal) {
+                    fetch('/projectuserspersonal', {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            project: r.id
+                        })
+                    }).then(setProjectName(""))
+                } else {
+                    setProjectName("")
+                }
+            })
 
-       
+
 
     }
 
 
-     return(
+    return (
         <form onSubmit={handleAddProject}>
-        <input value={projectName} onChange={e => setProjectName(e.target.value)}></input>
-        <button type="submit">Add Project</button>
-    </form>
+            <input value={projectName} onChange={e => setProjectName(e.target.value)}></input>
+            <button type="submit">Add Project</button>
+        </form>
     )
 }
 

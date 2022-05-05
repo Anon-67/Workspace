@@ -1,10 +1,15 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import {Link} from "react-router-dom"
+import { setActiveProject } from "./projectsSlice";
 
-function ProjectItem({ project, setProject }) {
+
+function ProjectItem({ project }) {
+    const dispatch = useDispatch()
+
 
     function handleClick(){
-        setProject(project)
+        dispatch(setActiveProject(project))
     }
 
     return (

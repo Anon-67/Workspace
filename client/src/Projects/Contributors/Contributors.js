@@ -1,11 +1,13 @@
 import React from "react";
 import "../Projects.css"
+import { useSelector } from "react-redux"
 
-function Contributors({ project,refresh }) {
+function Contributors() {
+    const activeProject = useSelector(state => state.projects.activeProject)
 
 
 
-    const users = project.users.map((user, index) => <li key={index}>{user.username}</li>)
+    const users = activeProject.users.map((user, index) => <li key={index}>{user.username}</li>)
 
     return (
         <div className="contributors">

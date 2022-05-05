@@ -5,7 +5,6 @@ class ProjectUsersController < ApplicationController
     end
 
     def personal
-        byebug
         ProjectUser.create(project_id: params[:project], user_id: session[:user_id])
     end
 end

@@ -5,7 +5,7 @@ class ResourcesController < ApplicationController
     end
 
     def create
-        resource = Resource.create(body: params[:resource], user_id: session[:user_id])
+        resource = Resource.create(body: params[:resource], user_id: 1)
         render json: resource, status: :ok
     end
 end

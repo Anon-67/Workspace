@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionCableContext } from "../index"
 import { fetchMessages, messageReceived } from "./messagesSlice"
+import { clearUnreads } from '../Sidebar/logoutSlice';
 
 
 function Conversation({ user }) {
@@ -16,6 +17,8 @@ function Conversation({ user }) {
 
   useEffect(() => {
     dispatch(fetchMessages(id))
+    dispatch(clearUnreads(id))
+    console.log("Test")
   }, [dispatch, id])
 
 

@@ -14,15 +14,17 @@ const slice = createSlice({
             console.log(message)
             state.unreads.push(message.conversation_id)
         },
-        clearUnreads(state, id) {
+        clearUnreads(state, action) {
+            console.log(action.payload)
+            state.unreads = state.unreads.filter(num => num != action.payload)
             
         }
     }
 })
 
-const { newMessage } = slice.actions
+const { newMessage, clearUnreads } = slice.actions
 
-export { newMessage }
+export { newMessage, clearUnreads }
 
 
 export default slice.reducer

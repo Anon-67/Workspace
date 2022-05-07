@@ -11,11 +11,9 @@ const slice = createSlice({
     reducers: {
         newMessage(state, action) {
             const message = action.payload
-            console.log(message)
             state.unreads.push(message.conversation_id)
         },
         clearUnreads(state, action) {
-            console.log(action.payload)
             state.unreads = state.unreads.filter(num => num != action.payload)
             
         }

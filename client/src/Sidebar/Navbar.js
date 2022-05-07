@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link } from "react-router-dom"
 import "./Navbar.css"
 import { useSelector, useDispatch } from "react-redux"
@@ -12,7 +12,6 @@ function NavBar({ user, setUser }) {
     const dispatch = useDispatch()
     console.log(unreads)
     const cable = useContext(ActionCableContext)
-    // const [channel, setChannel] = useState(null)
 
     useEffect(() => {
         const channel = cable.subscriptions.create({
@@ -26,8 +25,6 @@ function NavBar({ user, setUser }) {
             dispatch(newMessage(data))
           }
         })
-
-        // setChannel(channel)
 
         return () => {
             channel.unsubscribe()

@@ -8,4 +8,10 @@ class HandshakesController < ApplicationController
       def show
         membership = Handshake.find(params[:id])
       end
+
+      def update_read
+        conversation = Conversation.find(params[:id])
+        handshake = conversation.handshakes.where(user_id: session[:user_id]).first
+        handshake.update(last_read: Date.new)
+      end
 end

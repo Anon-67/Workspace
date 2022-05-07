@@ -13,12 +13,13 @@ function Conversation({ user }) {
   const [body, setBody] = useState("")
   const messages = useSelector(state => state.messages.messages)
   const dispatch = useDispatch()
-  console.log(user)
+
 
   useEffect(() => {
     dispatch(fetchMessages(id))
     dispatch(clearUnreads(id))
-    console.log("Test")
+    fetch(`/handshakes/${id}`)
+
   }, [dispatch, id])
 
 

@@ -39,7 +39,7 @@ function NavBar({ user, setUser }) {
                 if (r.ok) {
                     setUser(null);
                 }
-            }).then(window.location.reload());
+            });
 
  
 

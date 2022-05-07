@@ -45,10 +45,6 @@ function Content({ user, setUser }) {
                         <>
                             <Route path="/" element={<LandingPage user={user} setUser={setUser} />} />
                             <Route path="submit" element={<Signup user={user} setUser={setUser} />} />
-                            <Route
-                                path="*"
-                                element={<Navigate to="/" replace />}
-                            />
                         </>
                     )}
 

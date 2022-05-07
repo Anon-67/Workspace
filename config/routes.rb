@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get "/adminprojects", to: "projects#admin"
 
   post "/projectuserspersonal", to: "project_users#personal"
+  
+  get "/handshake/:id", to: "handshakes#update_read"
 
 
 

@@ -15,10 +15,19 @@ function Conversation({ user }) {
   const dispatch = useDispatch()
 
 
+
   useEffect(() => {
     dispatch(fetchMessages(id))
     dispatch(clearUnreads(id))
-    fetch(`/handshakes/${id}`)
+    fetch(`/handshakes/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        last_read: new Date()
+      })
+    })
 
   }, [dispatch, id])
 

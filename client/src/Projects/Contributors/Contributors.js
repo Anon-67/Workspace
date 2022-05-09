@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Projects.css"
-import { useSelector } from "react-redux"
+import { useParams } from "react-router-dom";
 
 function Contributors() {
-    const activeProject = useSelector(state => state.projects.activeProject)
+    const [users, setUsers] = useState([])
+    const { id } = useParams()
+    console.log(id)
 
 
 
-    const users = activeProject.users.map((user, index) => <li key={index}>{user.username}</li>)
+    useEffect(() => {
+        fetch(`http://localhost:4000/projects/projectusers/${id}`)
+            .then(r => r.json())
+            .then(r => setUsers(r))
+    }, [])
+
+    console.log(users)
+
+
+
+    const userMap = users.map((user, index) => <li key={index}>{user.username}</li>)
 
     return (
         <div className="contributors">
             <h1>Contributors:</h1>
             <ul>
-                {users}
+                {userMap}
             </ul>
         </div>
     )

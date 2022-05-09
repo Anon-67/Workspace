@@ -1,5 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
+export const fetchUnreads = createAsyncThunk("logout/fetchUnreads", () => {
+    return fetch(`/handshakes/unreads`)
+        .then(r => r.json())
+        .then(r => r)
+})
 
 const initialState = {
     unreads: []
@@ -16,6 +22,15 @@ const slice = createSlice({
         clearUnreads(state, action) {
             state.unreads = state.unreads.filter(num => num != action.payload)
             
+        }
+    },
+    extraReducers: {
+        [fetchUnreads.pending](state) {
+            state.status = "loading"
+        },
+        [fetchUnreads.fulfilled](state, action) {
+            state.unreads.concat(action.payload)
+            state.status = "idle"
         }
     }
 })

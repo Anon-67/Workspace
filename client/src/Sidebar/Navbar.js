@@ -3,14 +3,13 @@ import { Link } from "react-router-dom"
 import "./Navbar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { ActionCableContext } from "../index"
-import { newMessage } from "./logoutSlice"
+import { fetchUnreads, newMessage } from "./logoutSlice"
 
 
 
 function NavBar({ user, setUser }) {
     const unreads = useSelector(state => state.logout.unreads)
     const dispatch = useDispatch()
-    console.log(unreads)
     const cable = useContext(ActionCableContext)
 
     useEffect(() => {
@@ -29,7 +28,11 @@ function NavBar({ user, setUser }) {
         return () => {
             channel.unsubscribe()
         }
-    }, [])
+    }, [cable.subscriptions, dispatch, user.id])
+
+    useEffect(() => {
+        dispatch(fetchUnreads())
+    }, [dispatch])
 
     function handleLogoutClick() {
         fetch("/logout", {

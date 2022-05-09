@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   resources :notes, only: [:create]
   resources :resources, only: [:index, :create]
   resources :project_users, only: [:create]
-  resources :deliverables, only: [:create, :update]
+  resources :deliverables, only: [:create, :update, :show]
   resources :projects, only: [:index, :show, :create]
   resources :users, only: [:index, :create, :show]
 
   resources :conversations, only: [:index, :show, :create]
-  resources :handshakes, only: [:show]
+  resources :handshakes, only: [:index]
   resources :messages, only: [:show]
 
   mount ActionCable.server => "/cable"
@@ -25,7 +25,10 @@ Rails.application.routes.draw do
 
   post "/projectuserspersonal", to: "project_users#personal"
   
-  get "/handshake/:id", to: "handshakes#update_read"
+  patch "/handshakes/:id", to: "handshakes#update_read"
+
+  get "/handshakes/unreads", to: "handshakes#unreads"
+  get "/projects/projectusers/:id", to: "project_users#userlist"
 
 
 

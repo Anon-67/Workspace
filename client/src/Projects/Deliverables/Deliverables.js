@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Projects.css"
 import { useSelector } from "react-redux"
+import { useParams } from "react-router-dom";
 
 function Deliverables() {
     const activeProject = useSelector(state => state.projects.activeProject)
+    const [deliverables, setDeliverables] = useState([])
+    const { id } = useParams()
 
 
-    const deliverables = activeProject.deliverables.map((deliverable, index) => {
+    useEffect(() => {
+        fetch(`/deliverables/${id}`)
+            .then(r => r.json())
+            .then(r => setDeliverables(r))
+    }, [])
+
+
+    const deliverablesMap = deliverables.map((deliverable, index) => {
         if (deliverable.is_completed === true) {
             return (
                 <li>
                     <input type="checkbox" id={deliverable.id} key={index} value={deliverable.id} checked="checked" readOnly />
                     <label for={deliverable.id} >
-                        {deliverable.description}
+                        {deliverable.body}
                     </label>
                 </li>
             )
@@ -22,7 +32,7 @@ function Deliverables() {
                 <li>
                     <input type="checkbox" id={deliverable.id} key={index} value={deliverable.id} />
                     <label for={deliverable.id} >
-                        {deliverable.description}
+                        {deliverable.body}
                     </label>
                 </li>
             )
@@ -63,7 +73,7 @@ function Deliverables() {
             <h1>Deliverables:</h1>
             <form onSubmit={handleSubmit}>
                 <ul>
-                    {deliverables}
+                    {deliverablesMap}
                 </ul>
                 <button type="submit">Complete</button>
             </form>

@@ -19,7 +19,7 @@ function Login({ setUser }) {
             if (r.ok) {
                 r.json().then((user) => setUser(user));
             }
-        }).then(window.location.reload());
+        });
 
     }
 

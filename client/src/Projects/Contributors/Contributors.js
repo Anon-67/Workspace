@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 function Contributors() {
     const [users, setUsers] = useState([])
     const { id } = useParams()
-    console.log(id)
 
 
 
@@ -13,11 +12,7 @@ function Contributors() {
         fetch(`http://localhost:4000/projects/projectusers/${id}`)
             .then(r => r.json())
             .then(r => setUsers(r))
-    }, [])
-
-    console.log(users)
-
-
+    }, [id])
 
     const userMap = users.map((user, index) => <li key={index}>{user.username}</li>)
 

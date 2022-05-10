@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../Projects.css"
-import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
 
 function Deliverables() {
-    const activeProject = useSelector(state => state.projects.activeProject)
     const [deliverables, setDeliverables] = useState([])
     const { id } = useParams()
 
@@ -13,15 +11,15 @@ function Deliverables() {
         fetch(`/deliverables/${id}`)
             .then(r => r.json())
             .then(r => setDeliverables(r))
-    }, [])
+    }, [id])
 
 
     const deliverablesMap = deliverables.map((deliverable, index) => {
         if (deliverable.is_completed === true) {
             return (
-                <li>
-                    <input type="checkbox" id={deliverable.id} key={index} value={deliverable.id} checked="checked" readOnly />
-                    <label for={deliverable.id} >
+                <li key={index}>
+                    <input type="checkbox" id={deliverable.id}  value={deliverable.id} checked="checked" readOnly />
+                    <label htmlFor={deliverable.id} >
                         {deliverable.body}
                     </label>
                 </li>
@@ -29,9 +27,9 @@ function Deliverables() {
         } else {
 
             return (
-                <li>
-                    <input type="checkbox" id={deliverable.id} key={index} value={deliverable.id} />
-                    <label for={deliverable.id} >
+                <li key={index}>
+                    <input type="checkbox" id={deliverable.id}  value={deliverable.id} />
+                    <label htmlFor={deliverable.id} >
                         {deliverable.body}
                     </label>
                 </li>

@@ -22,7 +22,7 @@ function Conversation({ user }) {
     fetch(`/handshakes/${id}`, {
       method: "PATCH",
       headers: {
-        "Content-Type" : "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         last_read: new Date()
@@ -35,9 +35,9 @@ function Conversation({ user }) {
 
   useEffect(() => {
     const channel = cable.subscriptions.create({
-        channel: 'MessagesChannel',
-        id: id,
-      },
+      channel: 'MessagesChannel',
+      id: id,
+    },
       {
         received: (data) => {
           dispatch(messageReceived(data))
@@ -71,13 +71,14 @@ function Conversation({ user }) {
   return (
     <>
       <div>{id}</div>
+      <div>
+        {messageMap}
+      </div>
       <form onSubmit={sendMessage}>
         <input value={body} onChange={e => setBody(e.target.value)}></input>
         <button type="submit">Add Deliverable</button>
       </form>
-      <div>
-        {messageMap}
-      </div>
+
     </>
   )
 }

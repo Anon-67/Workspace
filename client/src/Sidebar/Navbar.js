@@ -57,8 +57,8 @@ function NavBar({ user, setUser }) {
                 <Link to="/resources">Resources</Link>
                 <Link to="/messages">Messages{unreads.length > 0 ? <div>UNREADS</div> : null}</Link>
                 {user.is_admin ? <Link to="/admin">Admin</Link> : null}
-                <Link to="/">
-                    <button onClick={handleLogoutClick}>logout</button>
+                <Link className="logout" to="/">
+                    <button className="action-button-1" onClick={handleLogoutClick}>logout</button>
                 </Link>
             </nav>
 

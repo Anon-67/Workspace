@@ -1,5 +1,6 @@
 nav {
     height: 100%;
+    background-color: #212121;
 
 
 }
@@ -9,11 +10,32 @@ nav {
     border: 1px solid black;
     position: fixed;
     z-index: 10;
+
 }
 
 a, a:visited, a:hover, a:active {
     display: block;
-	color: black;
+	color: #66fcf1;
 	text-decoration: none;
     padding: 10px;
   }
+
+
+  .action-button-1 {
+    font: inherit;
+    padding: 1em;
+    width: 100%;
+    font-weight: 500;
+    background-color: #66fcf1;
+    border-radius: 6px;
+    color: #1f2833;
+    border: 0;
+    
+
+}
+
+a.logout {
+    position: absolute;
+    bottom: 60px
+}
+

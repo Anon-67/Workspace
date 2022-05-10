@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchConversations, fetchHandshakes } from "./conversationSlice";
-import moment from "moment"
 
 function Messages() {
     const conversations = useSelector(state => state.conversations.conversations)
@@ -11,13 +10,7 @@ function Messages() {
     const [users, setUsers] = useState([])
     const [user, setUser] = useState("")
     const dispatch = useDispatch()
-    console.log(unreads)
 
-
-
-    handshakes.forEach(element => {
-        console.log(unreads.includes(element.conversation.id))
-    });
 
     useEffect(() => {
         dispatch(fetchConversations())
@@ -49,7 +42,7 @@ function Messages() {
 
 
     const userDropdown = users.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
-    const conversationMap = handshakes.map(handshake => <Link to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name}
+    const conversationMap = handshakes.map((handshake, index) => <Link key={index} to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name}
             {unreads.includes(handshake.conversation.id) ? <div>Unread</div> : null}
     </Link>)
 

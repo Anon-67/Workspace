@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Login.css"
 
 
 function Login({ setUser }) {
@@ -27,16 +28,22 @@ function Login({ setUser }) {
         <>
             <div className="test-parent">
 
-                <div>
-                    <form onSubmit={handleSubmit}>
+                <div className="login-card">
+                    <div className="card-image-login">
+                        <h2 className="card-heading">
+                            Welcome to Workspace!
+                            <small>Let's get to work!</small>
+                        </h2>
+                    </div>
+                    <form className="card-form" onSubmit={handleSubmit}>
                         <div>
-                            <input placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                            <input className="input-field" placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
                         </div>
                         <div>
-                            <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                            <input className="input-field" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </div>
                         <div>
-                            <button type="submit">login</button>
+                            <button className="action-button" type="submit">login</button>
                         </div>
                     </form>
                     <div class="card-info">

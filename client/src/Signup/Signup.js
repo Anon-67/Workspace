@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Home from "../Home/Home";
 
+import "./Signup.css"
+
 function Signup({ setUser, user }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -39,30 +41,27 @@ function Signup({ setUser, user }) {
             {user ? (
                 <Home />
             ) : (
-                <div>
-                    <div>
-                        {/* <h2>
+                <div className="card">
+                    <div className="card-image">
+                        <h2 className="card-heading">
                             Get started
                             <small>Let's create your account!</small>
-                        </h2> */}
+                        </h2>
                     </div>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <input placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
+                    <form className="card-form" onSubmit={handleSubmit}>
+                        <div className="input">
+                            <input className="input-field" placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
                         </div>
-                        <div>
-                            <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <div className="input">
+                            <input className="input-field" placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </div>
-                        <div>
-                            <input placeholder="Confirm Password" type="password" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
+                        <div className="input">
+                            <input className="input-field" placeholder="Confirm Password" type="password" value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
                         </div>
-                        <div >
-                            <button type="submit">Get started</button>
+                        <div className="action">
+                            <button className="action-button" type="submit">Get started</button>
                         </div>
                     </form>
-                    <div >
-                        <p></p>
-                    </div>
                 </div>
             )}
         </>

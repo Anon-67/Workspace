@@ -1,0 +1,28 @@
+.card {
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 60%;
+    background-color: #1f2833;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 0 rgba(#999, .25);
+    padding: .75rem;
+}
+
+.card-image {
+    border-radius: 8px;
+    overflow: hidden;
+    padding-bottom: 120px;
+    position: relative;
+}
+
+
+.action {
+    margin-top: 2rem;
+}
+
+
+.action-button:focus {
+    outline: 0;
+}

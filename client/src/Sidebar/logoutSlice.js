@@ -20,7 +20,7 @@ const slice = createSlice({
             state.unreads.push(message.conversation_id)
         },
         clearUnreads(state, action) {
-            state.unreads = state.unreads.filter(num => num != action.payload)
+            state.unreads = state.unreads.filter(num => num !==  parseInt(action.payload))
             
         }
     },

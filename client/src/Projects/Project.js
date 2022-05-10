@@ -27,16 +27,10 @@ function Project({ admin }) {
         fetch(`/projects/${id}`)
             .then(r => r.json())
             .then(r => setProject(r))
-    }, [])
+    }, [id])
 
-
-    console.log(project)
     let arr = project.deliverables.filter(d => d.is_completed)
     let newArr = arr.concat(project.notes).sort(function(a, b){return convert(a.updated_at) - convert(b.updated_at)})
-
-
-    newArr.map(e => console.log(convert(e.updated_at)))
-
 
     function handleAddContributor(e) {
         e.preventDefault()

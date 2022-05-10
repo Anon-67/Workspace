@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navigate } from "react-router-dom"
 import Admin from "../Admin/Admin";
 import LandingPage from "../LandingPage/LandingPage";
 import Conversation from "../Messages/Conversation";

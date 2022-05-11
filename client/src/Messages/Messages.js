@@ -10,12 +10,13 @@ function Messages() {
     const [users, setUsers] = useState([])
     const [user, setUser] = useState("")
     const dispatch = useDispatch()
+    const [refresh, setRefresh] = useState(false)
 
 
     useEffect(() => {
         dispatch(fetchConversations())
         dispatch(fetchHandshakes())
-    }, [dispatch])
+    }, [dispatch, refresh])
 
 
     useEffect(() => {
@@ -36,14 +37,14 @@ function Messages() {
                 user_id: user
             })
 
-        })
+        }).then(setRefresh(refresh => !refresh))
     }
 
 
 
     const userDropdown = users.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
     const conversationMap = handshakes.map((handshake, index) => <Link key={index} to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name}
-            {unreads.includes(handshake.conversation.id) ? <div>Unread</div> : null}
+            {unreads.includes(handshake.conversation.id) ? <span class="dot"></span> : null}
     </Link>)
 
 
@@ -59,7 +60,6 @@ function Messages() {
                 </select>
                 <button type="submit">Add Contributors</button>
             </form>
-            <button onClick={() => console.log(conversations)} >PRESS ME</button>
         </div>
     )
 }

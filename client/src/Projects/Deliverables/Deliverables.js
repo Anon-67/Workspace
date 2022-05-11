@@ -27,7 +27,7 @@ function Deliverables() {
         } else {
 
             return (
-                <li key={index}>
+                <li className="deliverable" key={index}>
                     <input type="checkbox" id={deliverable.id}  value={deliverable.id} />
                     <label htmlFor={deliverable.id} >
                         {deliverable.body}

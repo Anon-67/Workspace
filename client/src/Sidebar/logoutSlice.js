@@ -29,7 +29,7 @@ const slice = createSlice({
             state.status = "loading"
         },
         [fetchUnreads.fulfilled](state, action) {
-            state.unreads.concat(action.payload)
+            state.unreads = state.unreads.concat(action.payload)
             state.status = "idle"
         }
     }

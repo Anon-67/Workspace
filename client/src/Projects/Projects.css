@@ -17,6 +17,9 @@
     position: relative;
     width: 80%;
     display: inline-block;
+    min-height: 600px;
+    max-height: 8000px;
+
 
 
 
@@ -40,3 +43,62 @@ h1 {
 ul {
     list-style: none;
 }
+
+.project-wrapper{
+    font-weight: 200;
+    font-size: 2rem;
+    background-color: #1f2833;
+    margin: 10px;
+    height: 80px;
+    border-radius: 10px;
+    width: 80%;
+
+}
+
+.note{
+
+    padding: 10px;
+    border-bottom: 1px solid grey;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.task{
+
+    text-decoration: line-through;
+    padding: 10px;
+    border-bottom: 1px solid grey;
+    width: 80%;
+    background-color: #212121;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.note-user{
+    font-size: .75rem;
+    margin-left: 75%;
+}
+
+.deliverable {
+    width: 10%;
+}
+
+.project-title{
+    margin-left: 10%;
+}
+
+
+.note-form{
+    position: fixed;
+    margin-bottom: 20px;
+    width: 65%;
+    bottom: 0;
+    height: 50px;
+    margin-left: 5%;
+    background-color: #c5c6c7
+
+
+}
+

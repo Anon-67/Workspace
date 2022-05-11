@@ -6,19 +6,29 @@ nav {
 }
 
 .side-bar{
-    width: 100px;
+    width: 105px;
     border: 1px solid black;
     position: fixed;
     z-index: 10;
 
 }
 
-a, a:visited, a:hover, a:active {
+nav a, nav a:visited, nav a:hover, nav a:active {
     display: block;
 	color: #66fcf1;
 	text-decoration: none;
     padding: 10px;
   }
+  
+
+a, a:visited, a:hover, a:active {
+    color: white;
+    
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+
+}
 
 
   .action-button-1 {
@@ -36,6 +46,15 @@ a, a:visited, a:hover, a:active {
 
 a.logout {
     position: absolute;
-    bottom: 60px
+    bottom: 100px
 }
+
+.dot {
+    height: 10px;
+    width: 10px;
+    margin-left: 5px;
+    background-color: rgb(133, 0, 0);
+    border-radius: 50%;
+    display: inline-block;
+  }
 

@@ -13,13 +13,23 @@ function Project({ admin }) {
     const [note, setNote] = useState("")
     const activeProject = useSelector(state => state.projects.activeProject)
     const { id } = useParams()
-    const [project, setProject] = useState({ 
-        notes : [],
-        deliverables : []
+    const [project, setProject] = useState({
+        notes: [],
+        deliverables: []
     })
+    const [refresh, setRefresh] = useState(false)
 
     function convert(input) {
         return moment(input, 'CCYY-MM-DDThh:mm:ss[.sss]TZD').valueOf()
+    }
+
+    function selectClass(obj) {
+        if(typeof obj.is_completed === "undefined"){
+            return "note"
+        } else {
+            return "task"
+        }
+        
     }
 
 
@@ -27,16 +37,17 @@ function Project({ admin }) {
         fetch(`/projects/${id}`)
             .then(r => r.json())
             .then(r => setProject(r))
-    }, [id])
+    }, [id, refresh])
 
     let arr = project.deliverables.filter(d => d.is_completed)
-    let newArr = arr.concat(project.notes).sort(function(a, b){return convert(a.updated_at) - convert(b.updated_at)})
+    let newArr = arr.concat(project.notes).sort(function (a, b) { return convert(a.updated_at) - convert(b.updated_at) })
+    console.log(newArr)
 
     function handleAddContributor(e) {
         e.preventDefault()
 
         const projectUser = {
-            project: activeProject.id,
+            project: id,
             user: userToAdd
         }
 
@@ -81,7 +92,7 @@ function Project({ admin }) {
         const noteToSend = {
 
             body: note,
-            project: activeProject.id
+            project: id
 
         }
 
@@ -95,21 +106,24 @@ function Project({ admin }) {
             .then(r => {
                 if (r.ok) {
                     setNote("")
+                    
                 }
-            })
+            }).then(setRefresh(refresh => !refresh))
 
     }
 
 
     const userDropdown = allUsers.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
-    const postMap = newArr.map((note, index) => <li key={index}>{note.body}</li>)
+    const postMap = newArr.map((post, index) => (
+        <li className={selectClass(post)} key={index}><div>{post.body}</div>{post.user ? <div className="note-user">{` - ${post.user.username}`}</div> : null}</li>
+    ))
 
 
 
 
     return (
-        <>
-            <div className="left-side">{project.project_name}
+        <div className="center-div">
+            <div className="left-side"><h1 className="project-title">{project.project_name}</h1>
                 {admin ? (
                     <form onSubmit={handleAddContributor}>
                         <select onSubmit={handleAddContributor} onChange={(e) => setUserToAdd(e.target.value)} defaultValue={"DEFAULT"}>
@@ -134,17 +148,17 @@ function Project({ admin }) {
                 )}
 
 
-                <form onSubmit={handleAddNote}>
-                    <input value={note} onChange={e => setNote(e.target.value)}></input>
-                    <button type="submit">Add Note</button>
+                <form  onSubmit={handleAddNote}>
+                    <input className="note-form" value={note} onChange={e => setNote(e.target.value)}></input>
+
                 </form>
 
             </div>
             <div className="right-side">
-                <Deliverables  />
-                <Contributors  />
+                <Deliverables />
+                <Contributors />
             </div>
-        </>
+        </div>
     )
 
 }

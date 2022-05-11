@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { fetchProjects } from "./projectsSlice"
 
 
-function Projects({  clarification }) {
+function Projects({ clarification }) {
     const projects = useSelector(state => state.projects.projects)
     const dispatch = useDispatch()
 
@@ -18,13 +18,21 @@ function Projects({  clarification }) {
         if (clarification === "work") {
 
             if (project.is_personal === false) {
-                return <ProjectItem project={project} key={index} />
+                return (
+                    <div className="project-wrapper">
+                        <ProjectItem project={project} key={index} />
+                    </div>
+                )
             } else {
                 return null
             }
         } else if (clarification === "personal") {
             if (project.is_personal === true) {
-                return <ProjectItem project={project} key={index} />
+                return (
+                    <div className="project-wrapper">
+                        <ProjectItem project={project} key={index} />
+                    </div>
+                )
             } else {
                 return null
             }
@@ -35,9 +43,9 @@ function Projects({  clarification }) {
 
 
     return (
-        <div>
+        <div className="center-div">
             {projectMap}
-            {clarification === "personal" ? <Link to="/newpersonalproject">tets</Link> : null}
+            {clarification === "personal" ? <Link to="/newpersonalproject">New Project</Link> : null}
 
         </div>
 

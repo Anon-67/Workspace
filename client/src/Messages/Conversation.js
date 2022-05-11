@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ActionCableContext } from "../index"
 import { fetchMessages, messageReceived } from "./messagesSlice"
 import { clearUnreads } from '../Sidebar/logoutSlice';
+import "./Messages.css"
 
 
 function Conversation({ user }) {
@@ -13,6 +14,17 @@ function Conversation({ user }) {
   const [body, setBody] = useState("")
   const messages = useSelector(state => state.messages.messages)
   const dispatch = useDispatch()
+
+  function classPicker(message) {
+    console.log(message.user_id)
+
+    if (message.user_id === user.id) {
+      return "sent"
+    } else {
+      return "recieved"
+    }
+
+  }
 
 
 
@@ -62,7 +74,14 @@ function Conversation({ user }) {
     setBody("")
   }
 
-  const messageMap = messages.map((message, index) => <div key={index}>{message.body}</div>)
+  const messageMap = messages.map((message, index) => {
+
+    return (
+      <div className='test'>
+        <div key={index} className={classPicker(message)}>{message.body}</div>
+      </div>
+    )
+  })
 
 
 
@@ -70,13 +89,12 @@ function Conversation({ user }) {
 
   return (
     <>
-      <div>{id}</div>
-      <div>
+      <div className='user-name-box'>{id}</div>
+      <div className='chat-box'>
         {messageMap}
       </div>
       <form onSubmit={sendMessage}>
-        <input value={body} onChange={e => setBody(e.target.value)}></input>
-        <button type="submit">Add Deliverable</button>
+        <input className='message-input' value={body} onChange={e => setBody(e.target.value)} />
       </form>
 
     </>

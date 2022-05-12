@@ -47,16 +47,6 @@ const { messageReceived } = slice.actions
 
 export { messageReceived }
 
-// export const { selectAll: selectAllMessages } = messagesAdapter.getSelectors(
-//     (state) => state.messages
-// )
-
-// export const selectMessagesByConversation = createSelector(
-//     [selectAllMessages, (state, conversation) => conversation],
-//     (messages, teamId) => messages.filter((message) => message.teamId === teamId)
-// )
-
-
 
 
 export default slice.reducer

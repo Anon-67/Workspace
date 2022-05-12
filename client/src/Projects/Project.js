@@ -24,12 +24,12 @@ function Project({ admin }) {
     }
 
     function selectClass(obj) {
-        if(typeof obj.is_completed === "undefined"){
+        if (typeof obj.is_completed === "undefined") {
             return "note"
         } else {
             return "task"
         }
-        
+
     }
 
 
@@ -106,7 +106,7 @@ function Project({ admin }) {
             .then(r => {
                 if (r.ok) {
                     setNote("")
-                    
+
                 }
             }).then(setRefresh(refresh => !refresh))
 
@@ -124,38 +124,41 @@ function Project({ admin }) {
     return (
         <div className="center-div">
             <div className="left-side"><h1 className="project-title">{project.project_name}</h1>
-                {admin ? (
-                    <form onSubmit={handleAddContributor}>
-                        <select onSubmit={handleAddContributor} onChange={(e) => setUserToAdd(e.target.value)} defaultValue={"DEFAULT"}>
-                            <option value="DEFAULT" disabled >Add a user...</option>
-                            {userDropdown}
-                        </select>
-                        <button type="submit">Add Contributors</button>
-                    </form>
 
-                ) : null}
-                <ul>
+                <ul className="posts"> 
                     {postMap}
                 </ul>
-                {admin ? (
-                    <form onSubmit={handleAddDeliverable}>
-                        <input value={deliverable} onChange={e => setDeliverable(e.target.value)}></input>
-                        <button type="submit">Add Deliverable</button>
-                    </form>
+                <div className="admin-add">
+                    {admin ? (
+                        <form className="admin-form" onSubmit={handleAddDeliverable}>
+                            <input className="wide" value={deliverable} onChange={e => setDeliverable(e.target.value)}></input>
+                            <button className="action-button-2" type="submit">Add Deliverable</button>
+                        </form>
 
-                ) : (
-                    null
-                )}
+                    ) : (
+                        null
+                    )}
+                    {admin ? (
+                        <form className="admin-form" onSubmit={handleAddContributor}>
+                            <select className="wide" onSubmit={handleAddContributor} onChange={(e) => setUserToAdd(e.target.value)} defaultValue={"DEFAULT"}>
+                                <option value="DEFAULT" disabled >Add a user...</option>
+                                {userDropdown}
+                            </select>
+                            <button className="action-button-2" type="submit">Add Contributors</button>
+                        </form>
 
+                    ) : null}
+                </div>
 
-                <form  onSubmit={handleAddNote}>
+                <form onSubmit={handleAddNote}>
                     <input className="note-form" value={note} onChange={e => setNote(e.target.value)}></input>
 
                 </form>
 
+
             </div>
             <div className="right-side">
-                <Deliverables />
+                <Deliverables refresh={refresh} setRefresh={setRefresh} />
                 <Contributors />
             </div>
         </div>

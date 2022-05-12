@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../Projects.css"
 import { useParams } from "react-router-dom";
 
-function Deliverables() {
+function Deliverables({setRefresh, refresh}) {
     const [deliverables, setDeliverables] = useState([])
     const { id } = useParams()
 
@@ -59,6 +59,9 @@ function Deliverables() {
                 return null
             }
         })
+
+
+        setRefresh(refresh => !refresh)
     }
 
 
@@ -73,7 +76,7 @@ function Deliverables() {
                 <ul>
                     {deliverablesMap}
                 </ul>
-                <button type="submit">Complete</button>
+                <button className="action-button-2" type="submit">Complete</button>
             </form>
         </div>
     )

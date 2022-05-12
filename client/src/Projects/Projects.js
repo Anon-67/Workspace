@@ -20,7 +20,7 @@ function Projects({ clarification }) {
             if (project.is_personal === false) {
                 return (
                     <div className="project-wrapper">
-                        <ProjectItem project={project} key={index} />
+                        <ProjectItem  project={project} key={index} />
                     </div>
                 )
             } else {
@@ -30,7 +30,7 @@ function Projects({ clarification }) {
             if (project.is_personal === true) {
                 return (
                     <div className="project-wrapper">
-                        <ProjectItem project={project} key={index} />
+                        <ProjectItem  project={project} key={index} />
                     </div>
                 )
             } else {
@@ -45,7 +45,8 @@ function Projects({ clarification }) {
     return (
         <div className="center-div">
             {projectMap}
-            {clarification === "personal" ? <Link to="/newpersonalproject">New Project</Link> : null}
+
+            {clarification === "personal" ? <div><button className="action-button-2"><Link className="link-black" to="/newpersonalproject">New Project</Link></button></div> : null}
 
         </div>
 

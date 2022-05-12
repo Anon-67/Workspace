@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react'
+import React, { useEffect, useContext, useState, useRef } from 'react'
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import { ActionCableContext } from "../index"
@@ -14,6 +14,7 @@ function Conversation({ user }) {
   const [body, setBody] = useState("")
   const messages = useSelector(state => state.messages.messages)
   const dispatch = useDispatch()
+  const messagesEndRef = useRef(null);
 
   function classPicker(message) {
     console.log(message.user_id)
@@ -25,6 +26,15 @@ function Conversation({ user }) {
     }
 
   }
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({
+      behavior: "auto",
+      block: "end"
+    });
+  };
+
+  useEffect(scrollToBottom, [messages]);
 
 
 
@@ -92,6 +102,9 @@ function Conversation({ user }) {
       <div className='user-name-box'>{id}</div>
       <div className='chat-box'>
         {messageMap}
+
+          <div ref={messagesEndRef} className="ref-div" />
+
       </div>
       <form onSubmit={sendMessage}>
         <input className='message-input' value={body} onChange={e => setBody(e.target.value)} />

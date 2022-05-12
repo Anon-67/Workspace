@@ -15,15 +15,17 @@ nav {
 
 nav a, nav a:visited, nav a:hover, nav a:active {
     display: block;
-	color: #66fcf1;
+	color: #45a29f;
 	text-decoration: none;
     padding: 10px;
   }
+
+nav a:hover, nav a:active{
+    color: #66fcf1;
+}
   
 
 a, a:visited, a:hover, a:active {
-    color: white;
-    
     text-decoration: none;
     padding: 10px;
     display: block;

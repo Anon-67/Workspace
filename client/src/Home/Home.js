@@ -1,9 +1,10 @@
 import React from "react";
+import "./Home.css"
 
 
-function Home() {
+function Home({ user }) {
     return (
-        <div>Home</div>
+        <h1 className="welcome">Welcome back, {user.username}!</h1>
     )
 
 }

@@ -22,7 +22,11 @@ function Admin({ setAdminProject }) {
         <>
             <div>ADMIN</div>
             {adminProjectsMap}
-            <Link to="/adminnewproject" >New Project</Link>
+            <div>
+                <button className="action-button-2">
+                    <Link to="/adminnewproject" >New Project</Link>
+                </button>
+            </div>
         </>
     )
 }

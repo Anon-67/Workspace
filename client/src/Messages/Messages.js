@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { fetchConversations, fetchHandshakes } from "./conversationSlice";
 
 function Messages() {
-    const conversations = useSelector(state => state.conversations.conversations)
     const handshakes = useSelector(state => state.conversations.handshakes)
     const unreads = useSelector(state => state.logout.unreads)
     const [users, setUsers] = useState([])
@@ -43,8 +42,8 @@ function Messages() {
 
 
     const userDropdown = users.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
-    const conversationMap = handshakes.map((handshake, index) => <Link key={index} to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name}
-            {unreads.includes(handshake.conversation.id) ? <span class="dot"></span> : null}
+    const conversationMap = handshakes.map((handshake, index) => <Link className="message-card" key={index} to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name}
+        {unreads.includes(handshake.conversation.id) ? <span class="dot"></span> : null}
     </Link>)
 
 
@@ -53,13 +52,17 @@ function Messages() {
 
             Messages:
             {conversationMap}
-            <form onSubmit={handleAddConversation}>
-                <select onChange={(e) => setUser(e.target.value)} defaultValue={"DEFAULT"}>
-                    <option value="DEFAULT" disabled >Add a user...</option>
-                    {userDropdown}
-                </select>
-                <button type="submit">Add Contributors</button>
-            </form>
+            <div className="dropdown-div">
+                <form onSubmit={handleAddConversation}>
+                    <select className="green" onChange={(e) => setUser(e.target.value)} defaultValue={"DEFAULT"}>
+                        <option value="DEFAULT" disabled >New Conversation</option>
+                        {userDropdown}
+                    </select>
+                    <div>
+                        <button className="action-button-2" type="submit">Start Conversation</button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }

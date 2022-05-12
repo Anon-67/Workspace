@@ -15,7 +15,7 @@ function ProjectsAdmin({project, setAdminProject}) {
     }
     
     return (
-        <Link to={`projects/${project.id}` } onClick={handleClick}>{project.project_name}</Link>
+        <Link className="project-title-card" to={`projects/${project.id}` } onClick={handleClick}>{project.project_name}</Link>
     )
 }
 

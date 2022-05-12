@@ -6,7 +6,7 @@ import Login from "../Login/Login";
 function LandingPage({setUser, user}) {
     return(
         <>
-        {user ? <Home /> : <Login setUser={setUser} user={user} />}
+        {user ? <Home user={user} /> : <Login setUser={setUser} user={user} />}
         </>
     )
 }

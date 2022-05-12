@@ -1,5 +1,6 @@
 .chat-box {
     display: inline-block;
+    position: relative;
     background-color: white ;
     width: 80%;
     height: 300px;
@@ -51,6 +52,33 @@
     margin-bottom: 5px;
 }
 
-.message-list-item{
+.message-card{
+    color: white;
+    border-bottom: 1px solid #66fcf1 ;
+    width: 80%;
+    margin-left: 20px;
 
 }
+
+.dropdown-div{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.green {
+    width:30%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.ref-div{
+    position: relative;
+	padding: 10px 10px 10px 12px;
+	border-radius: 10px;
+	flex-direction: column;
+
+    width: 80%;
+	float: left;
+    margin-bottom: 5px;
+}
+

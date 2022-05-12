@@ -52,6 +52,11 @@ ul {
     height: 80px;
     border-radius: 10px;
     width: 80%;
+    overflow: hidden;
+    
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
 }
 
@@ -101,4 +106,57 @@ ul {
 
 
 }
+ .project-title-card{
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #66fcf1;
+ }
+ a.project-title-card{
+     color: #66fcf1;
+ }
 
+ .action-button-2 {
+    font: inherit;
+    margin: 10px;
+    padding: 1em;
+    width: 200px;
+    font-weight: 500;
+    background-color: #66fcf1;
+    border-radius: 6px;
+    color: #1f2833;
+    border: 0;
+
+ }
+
+ a.link-black{
+     color: black;
+ }
+
+
+ .center-div{
+     display: inline-block;
+     width: 100%;
+ }
+
+ .admin-add {
+     width: 80%;
+     margin-left: 7%;
+ }
+
+ .admin-form{
+     padding: 10px;
+     width: 80%;
+
+ }
+
+ .wide {
+     width: 50%;
+     height: 50px;
+     background-color: #c5c6c7;
+ }
+
+ .posts{
+     max-height: 550px;
+     overflow-y: auto;
+ }

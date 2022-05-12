@@ -7,7 +7,7 @@ import { clearUnreads } from '../Sidebar/logoutSlice';
 import "./Messages.css"
 
 
-function Conversation({ user }) {
+function Conversation({ user, name }) {
   const { id } = useParams()
   const cable = useContext(ActionCableContext)
   const [channel, setChannel] = useState(null)
@@ -16,8 +16,10 @@ function Conversation({ user }) {
   const dispatch = useDispatch()
   const messagesEndRef = useRef(null);
 
+
+
+
   function classPicker(message) {
-    console.log(message.user_id)
 
     if (message.user_id === user.id) {
       return "sent"
@@ -55,6 +57,8 @@ function Conversation({ user }) {
 
 
 
+
+
   useEffect(() => {
     const channel = cable.subscriptions.create({
       channel: 'MessagesChannel',
@@ -72,6 +76,8 @@ function Conversation({ user }) {
       channel.unsubscribe()
     }
   }, [id, cable.subscriptions, dispatch])
+
+
 
   function sendMessage(e) {
     e.preventDefault()
@@ -95,11 +101,9 @@ function Conversation({ user }) {
 
 
 
-
-
   return (
     <>
-      <div className='user-name-box'>{id}</div>
+      <div className='user-name-box'>{id}{name}</div>
       <div className='chat-box'>
         {messageMap}
 

@@ -22,7 +22,7 @@ function Messages() {
         fetch('/users')
             .then(r => r.json())
             .then(r => setUsers(r))
-    }, [])
+    }, [refresh])
 
 
     function handleAddConversation(e) {
@@ -41,8 +41,9 @@ function Messages() {
 
 
 
+
     const userDropdown = users.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
-    const conversationMap = handshakes.map((handshake, index) => <Link className="message-card" key={index} to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name}
+    const conversationMap = handshakes.map((handshake, index) => <Link className="message-card" key={index}  to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name.replace(`${handshake.user.username}`, "")}
         {unreads.includes(handshake.conversation.id) ? <span class="dot"></span> : null}
     </Link>)
 

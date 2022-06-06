@@ -7,6 +7,7 @@ This is a Flatiron School Capstone project. It is designed to be used in a workp
 - Ruby 2.7.4
 - NodeJS (v16), and npm
 - Postgresql
+- Redis-server
 
 See Environment Setup below for instructions on installing these tools if you
 don't already have them.

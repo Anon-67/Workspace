@@ -39,6 +39,8 @@ function Messages() {
         }).then(setRefresh(refresh => !refresh))
     }
 
+    console.log(unreads)
+
 
 
 

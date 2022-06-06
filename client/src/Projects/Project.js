@@ -57,7 +57,10 @@ function Project({ admin }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(projectUser)
-        })
+        }).then(r => {
+            if (r.ok) {
+                setRefresh(refresh => !refresh)
+            }})
 
 
     }
@@ -67,7 +70,7 @@ function Project({ admin }) {
 
         const deliverableToAdd = {
             description: deliverable,
-            project: activeProject.id
+            project: id
         }
 
         fetch('/deliverables', {
@@ -76,7 +79,10 @@ function Project({ admin }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(deliverableToAdd)
-        }).then(setDeliverable(""))
+        }).then(
+            setDeliverable(""),
+            setRefresh(refresh => !refresh)
+            )
     }
 
     useEffect(() => {

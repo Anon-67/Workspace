@@ -39,21 +39,28 @@ function Messages() {
         }).then(setRefresh(refresh => !refresh))
     }
 
-    console.log(unreads)
-
-
-
-
     const userDropdown = users.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
-    const conversationMap = handshakes.map((handshake, index) => <Link className="message-card" key={index}  to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name.replace(`${handshake.user.username}`, "")}
+    const conversationMap = handshakes.map((handshake, index) => <Link className="message-card" key={index} to={`/conversation/${handshake.conversation.id}`}>{handshake.conversation.name.replace(`${handshake.user.username}`, "")}
         {unreads.includes(handshake.conversation.id) ? <span class="dot"></span> : null}
     </Link>)
+
+    const testMap = users.map((user, index) => {
+        console.log(user)
+        if(user.handshakes.length < 0){
+            console.log("here")
+        }
+
+        return (<Link className="message-card" key={index} to="/" >
+            {user.username}
+        </Link>)
+    })
 
 
     return (
         <div>
 
             Messages:
+            {testMap}
             {conversationMap}
             <div className="dropdown-div">
                 <form onSubmit={handleAddConversation}>

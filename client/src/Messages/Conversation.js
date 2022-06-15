@@ -7,7 +7,7 @@ import { clearUnreads } from '../Sidebar/logoutSlice';
 import "./Messages.css"
 
 
-function Conversation({ user, name }) {
+function Conversation({ name }) {
   const { id } = useParams()
   const cable = useContext(ActionCableContext)
   const [channel, setChannel] = useState(null)
@@ -15,6 +15,7 @@ function Conversation({ user, name }) {
   const messages = useSelector(state => state.messages.messages)
   const dispatch = useDispatch()
   const messagesEndRef = useRef(null);
+  const user = useSelector(state => state.state.user)
 
 
 

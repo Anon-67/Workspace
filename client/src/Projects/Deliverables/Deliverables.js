@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../Projects.css"
 import { useParams } from "react-router-dom";
 
-function Deliverables({setRefresh, refresh}) {
+function Deliverables() {
     const [deliverables, setDeliverables] = useState([])
     const { id } = useParams()
 
@@ -40,7 +40,6 @@ function Deliverables({setRefresh, refresh}) {
 
 
     function handleSubmit(e) {
-        e.preventDefault()
         let elements = Array.from(e.target.elements)
         elements.map(e => {
             if (e.checked && e.readOnly === false) {
@@ -59,9 +58,6 @@ function Deliverables({setRefresh, refresh}) {
                 return null
             }
         })
-
-
-        setRefresh(refresh => !refresh)
     }
 
 

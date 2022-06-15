@@ -9,10 +9,10 @@ import { setUser } from "../util/reducer";
 
 
 function NavBar() {
-    const unreads = useSelector(state => state.logout.unreads)
-    const dispatch = useDispatch()
-    const cable = useContext(ActionCableContext)
     const user = useSelector(state => state.state.user)
+    const unreads = useSelector(state => state.logout.unreads)
+    const cable = useContext(ActionCableContext)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const channel = cable.subscriptions.create({
@@ -20,9 +20,7 @@ function NavBar() {
             id: user.id,
         },
         {
-          received: (data) => {
-              console.log("test")
-              
+          received: (data) => {              
             dispatch(newMessage(data))
           }
         })

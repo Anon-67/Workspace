@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect  } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchResources } from "../util/reducer";
 import "./Resources.css"
 
 function Resources() {
-    const [resources, setResources] = useState([])
+    const resources = useSelector(state => state.state.resources)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        fetch("/resources")
-            .then(r => r.json())
-            .then(r => setResources(r))
-    }, [])
+        dispatch(fetchResources())
+    }, [dispatch])
 
     const resourceMap = resources.map((resource, index) => <div className="resource"><a className="white" key={index} href={resource.body}>{resource.body}</a></div>)
     return (

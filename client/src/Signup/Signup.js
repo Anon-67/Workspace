@@ -1,12 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Home from "../Home/Home";
+import { setUser } from "../util/reducer";
 
 import "./Signup.css"
 
-function Signup({ setUser, user }) {
+function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("")
+    const user = useSelector(state => state.state.user)
+    const dispatch = useDispatch()
 
 
 
@@ -28,9 +32,7 @@ function Signup({ setUser, user }) {
         })
             .then(r => {
                 if (r.ok) {
-                    r.json().then(r => setUser(r))
-                } else {
-                    r.json().then(r => console.log(r))
+                    r.json().then(r => dispatch(setUser(r)))
                 }
             })
     }

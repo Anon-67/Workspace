@@ -3,21 +3,18 @@ import { useParams } from "react-router-dom";
 import Contributors from "./Contributors/Contributors";
 import Deliverables from "./Deliverables/Deliverables";
 import "./Projects.css"
-import { useSelector } from "react-redux"
 import moment from "moment";
 
-function Project({ admin }) {
+function ProjectPage({ admin }) {
     const [deliverable, setDeliverable] = useState("")
     const [allUsers, setAllUsers] = useState([])
     const [userToAdd, setUserToAdd] = useState({})
     const [note, setNote] = useState("")
-    const activeProject = useSelector(state => state.projects.activeProject)
     const { id } = useParams()
     const [project, setProject] = useState({
         notes: [],
         deliverables: []
     })
-    const [refresh, setRefresh] = useState(false)
 
     function convert(input) {
         return moment(input, 'CCYY-MM-DDThh:mm:ss[.sss]TZD').valueOf()
@@ -32,19 +29,15 @@ function Project({ admin }) {
 
     }
 
-
     useEffect(() => {
         fetch(`/projects/${id}`)
             .then(r => r.json())
             .then(r => setProject(r))
-    }, [id, refresh])
+    }, [id])
 
-    let arr = project.deliverables.filter(d => d.is_completed)
-    let newArr = arr.concat(project.notes).sort(function (a, b) { return convert(a.updated_at) - convert(b.updated_at) })
-    console.log(newArr)
 
-    function handleAddContributor(e) {
-        e.preventDefault()
+
+    function handleAddContributor() {
 
         const projectUser = {
             project: id,
@@ -57,16 +50,12 @@ function Project({ admin }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(projectUser)
-        }).then(r => {
-            if (r.ok) {
-                setRefresh(refresh => !refresh)
-            }})
+        })
 
 
     }
 
-    function handleAddDeliverable(e) {
-        e.preventDefault()
+    function handleAddDeliverable() {
 
         const deliverableToAdd = {
             description: deliverable,
@@ -79,27 +68,14 @@ function Project({ admin }) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(deliverableToAdd)
-        }).then(
-            setDeliverable(""),
-            setRefresh(refresh => !refresh)
-            )
+        })
     }
 
-    useEffect(() => {
-        fetch("/users")
-            .then(r => r.json())
-            .then(r => setAllUsers(r))
-    }, [])
-
-
-    function handleAddNote(e) {
-        e.preventDefault()
+    function handleAddNote() {
 
         const noteToSend = {
-
             body: note,
             project: id
-
         }
 
         fetch("/notes", {
@@ -109,29 +85,30 @@ function Project({ admin }) {
             },
             body: JSON.stringify(noteToSend)
         })
-            .then(r => {
-                if (r.ok) {
-                    setNote("")
-
-                }
-            }).then(setRefresh(refresh => !refresh))
-
     }
 
 
-    const userDropdown = allUsers.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
+    let arr = project.deliverables.filter(d => d.is_completed)
+    let newArr = arr.concat(project.notes).sort(function (a, b) { return convert(a.updated_at) - convert(b.updated_at) })
     const postMap = newArr.map((post, index) => (
         <li className={selectClass(post)} key={index}><div>{post.body}</div>{post.user ? <div className="note-user">{` - ${post.user.username}`}</div> : null}</li>
     ))
 
 
 
+    useEffect(() => {
+        fetch("/users")
+            .then(r => r.json())
+            .then(r => setAllUsers(r))
+    }, [])
+    const userDropdown = allUsers.map((user, index) => <option key={index} value={user.id}>{user.username}</option>)
+
 
     return (
         <div className="center-div">
             <div className="left-side"><h1 className="project-title">{project.project_name}</h1>
 
-                <ul className="posts"> 
+                <ul className="posts">
                     {postMap}
                 </ul>
                 <div className="admin-add">
@@ -164,7 +141,7 @@ function Project({ admin }) {
 
             </div>
             <div className="right-side">
-                <Deliverables refresh={refresh} setRefresh={setRefresh} />
+                <Deliverables />
                 <Contributors />
             </div>
         </div>
@@ -172,4 +149,4 @@ function Project({ admin }) {
 
 }
 
-export default Project
+export default ProjectPage

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { fetchAdminProjects } from "./adminSlice"
 import { useSelector, useDispatch } from "react-redux"
 
-function Admin({ setAdminProject }) {
+function Admin() {
     const adminProjects = useSelector(state => state.admin.adminProjects)
     const dispatch = useDispatch()
 
@@ -14,7 +14,7 @@ function Admin({ setAdminProject }) {
 
     const adminProjectsMap = adminProjects.map((project, index) => (
         <div className="project-wrapper">
-            <ProjectsAdmin project={project} key={index} setAdminProject={setAdminProject} />
+            <ProjectsAdmin project={project} key={index} />
         </div>
     ))
 

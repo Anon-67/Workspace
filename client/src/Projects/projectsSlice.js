@@ -11,13 +11,7 @@ const slice = createSlice({
     name: 'projects',
     initialState: {
         projects: [],
-        activeProject: null,
         status: "idle"
-    },
-    reducers: {
-        setActiveProject(state, action){
-            state.activeProject = action.payload
-        }
     },
     extraReducers:{
         [fetchProjects.pending](state) {
@@ -30,10 +24,6 @@ const slice = createSlice({
     }
 }
 )
-
-const { setActiveProject } = slice.actions
-
-export { setActiveProject }
 
 
 export default slice.reducer

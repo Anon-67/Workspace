@@ -29,7 +29,6 @@ function Login() {
     return (
         <>
             <div className="test-parent">
-
                 <div className="login-card">
                     <div className="card-image-login">
                         <h2 className="card-heading">

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { fetchProjects } from "./projectsSlice"
 
 
-function Projects({ clarification }) {
+function ProjectsList({ clarification }) {
     const projects = useSelector(state => state.projects.projects)
     const dispatch = useDispatch()
 
@@ -16,7 +16,6 @@ function Projects({ clarification }) {
     const projectMap = projects.map((project, index) => {
 
         if (clarification === "work") {
-
             if (project.is_personal === false) {
                 return (
                     <div className="project-wrapper">
@@ -53,4 +52,4 @@ function Projects({ clarification }) {
     )
 }
 
-export default Projects
+export default ProjectsList

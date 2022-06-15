@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../util/reducer";
 import "./Login.css"
 
 
-function Login({ setUser }) {
-
+function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch()
 
 
     function handleSubmit(e) {
@@ -18,7 +20,7 @@ function Login({ setUser }) {
             body: JSON.stringify({ username, password }),
         }).then((r) => {
             if (r.ok) {
-                r.json().then((user) => setUser(user));
+                r.json().then((user) => dispatch(setUser(user)));
             }
         });
 

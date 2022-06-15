@@ -4,13 +4,15 @@ import "./Navbar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { ActionCableContext } from "../index"
 import { fetchUnreads, newMessage } from "./logoutSlice"
+import { setUser } from "../util/reducer";
 
 
 
-function NavBar({ user, setUser }) {
+function NavBar() {
     const unreads = useSelector(state => state.logout.unreads)
     const dispatch = useDispatch()
     const cable = useContext(ActionCableContext)
+    const user = useSelector(state => state.state.user)
 
     useEffect(() => {
         const channel = cable.subscriptions.create({
@@ -40,7 +42,7 @@ function NavBar({ user, setUser }) {
         })
             .then((r) => {
                 if (r.ok) {
-                    setUser(null);
+                    dispatch(setUser(null));
                 }
             });
 

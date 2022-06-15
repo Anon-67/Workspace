@@ -7,8 +7,7 @@ const initialState = messagesAdapter.getInitialState({
     status: 'idle',
     messages: [],
     unreadMessages: []
-}
-)
+})
 
 
 export const fetchMessages = createAsyncThunk("messages/fetchMessages", (id) => {

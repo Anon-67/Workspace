@@ -7,11 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# 10.times {User.create(username: Faker::Name.unique.first_name, password: "password", password_confirmation: "password", is_admin: false)}
+10.times {User.create(username: Faker::Name.unique.first_name, password: "password", password_confirmation: "password", is_admin: false)}
 
-# 10.times {Project.create(project_name: Faker::Hipster.sentence(word_count: 3), is_personal: false)}
+10.times {Project.create(project_name: Faker::Hipster.sentence(word_count: 3), is_personal: false)}
 
 
 
-# User.create(username: "username", password: "password", password_confirmation: "password", is_admin: true)
+User.create(username: "username", password: "password", password_confirmation: "password", is_admin: true)
 

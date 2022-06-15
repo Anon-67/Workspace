@@ -1,23 +1,25 @@
 import Header from '../Header/Header';
 import './App.css';
-import {useState, useEffect} from "react"
+import {useEffect} from "react"
 import Content from '../Content/Content';
+import { useDispatch} from 'react-redux';
+import { setUser } from '../util/reducer';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => dispatch(setUser(user)));
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
-    <Header user={user}/>
-    <Content user={user} setUser={setUser}/>
+    <Header />
+    <Content />
     </>
 
   );

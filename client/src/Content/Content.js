@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "../Admin/Admin";
 import LandingPage from "../LandingPage/LandingPage";
@@ -14,7 +15,8 @@ import "./Content.css"
 
 
 
-function Content({ user, setUser }) {
+function Content({ setUser }) {
+    const user = useSelector(state => state.state.user)
     const [adminProject, setAdminProject] = useState([])
 
 
@@ -22,7 +24,7 @@ function Content({ user, setUser }) {
     return (
 
         <Router>
-            {user ? (<NavBar user={user} setUser={setUser} />) : null}
+            {user ? (<NavBar />) : null}
             <div className="center">
                 <Routes>
                     {user ? (

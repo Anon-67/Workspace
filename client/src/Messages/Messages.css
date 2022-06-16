@@ -10,6 +10,7 @@
     padding-top: 10px;
     padding-bottom: 50px;
     height: 600px;
+    margin-top: 10px;
 }
 .user-name-box{
     margin-left: 50px;
@@ -82,3 +83,7 @@
     margin-bottom: 5px;
 }
 
+
+.username{
+    font-size: x-small;
+}

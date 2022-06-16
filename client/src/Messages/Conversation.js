@@ -5,17 +5,18 @@ import { ActionCableContext } from "../index"
 import { fetchMessages, messageReceived } from "./messagesSlice"
 import { clearUnreads } from '../Sidebar/logoutSlice';
 import "./Messages.css"
+import { fetchConversation } from '../util/reducer';
 
 
-function Conversation({ name }) {
+function Conversation() {
   const { id } = useParams()
-  const cable = useContext(ActionCableContext)
   const [channel, setChannel] = useState(null)
   const [body, setBody] = useState("")
+  const cable = useContext(ActionCableContext)
   const messages = useSelector(state => state.messages.messages)
-  const dispatch = useDispatch()
-  const messagesEndRef = useRef(null);
   const user = useSelector(state => state.state.user)
+  const messagesEndRef = useRef(null);
+  const dispatch = useDispatch()
 
 
 
@@ -44,6 +45,7 @@ function Conversation({ name }) {
   useEffect(() => {
     dispatch(fetchMessages(id))
     dispatch(clearUnreads(id))
+    dispatch(fetchConversation(id))
     fetch(`/handshakes/${id}`, {
       method: "PATCH",
       headers: {
@@ -85,17 +87,21 @@ function Conversation({ name }) {
     const data = {
       id,
       body,
-      user: user.id
+      user: user
     }
     channel.send(data)
     setBody("")
   }
 
   const messageMap = messages.map((message, index) => {
+    console.log(message.user.username)
 
     return (
       <div className='test'>
-        <div key={index} className={classPicker(message)}>{message.body}</div>
+        <div key={index} className={classPicker(message)}>
+          <div className='username'>{message.user.username}:</div>
+          <span>{message.body}</span>
+          </div>
       </div>
     )
   })
@@ -104,14 +110,13 @@ function Conversation({ name }) {
 
   return (
     <>
-      <div className='user-name-box'>{id}{name}</div>
       <div className='chat-box'>
         {messageMap}
 
           <div ref={messagesEndRef} className="ref-div" />
 
       </div>
-      <form onSubmit={sendMessage}>
+      <form onSubmit={(e) => sendMessage(e)}>
         <input className='message-input' value={body} onChange={e => setBody(e.target.value)} />
       </form>
 

@@ -6,10 +6,10 @@ class MessagesChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    user = User.find(data["user"])
+    user = User.find(data["user"]["id"])
     @reciever = @conversation.users.where.not(id: user.id).first
     message = @conversation.messages.create(body: data["body"], user: user, read: false)
-    MessagesChannel.broadcast_to(@conversation, message)
+    MessagesChannel.broadcast_to(@conversation, message: message, user: {username: user.username})
     UserChannel.broadcast_to(@reciever, message)
   end
 

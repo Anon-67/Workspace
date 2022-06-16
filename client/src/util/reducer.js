@@ -6,7 +6,8 @@ const initialState = sliceAdapter.getInitialState({
     user: null,
     adminProject: null,
     resources: [],
-    allUsers: []
+    allUsers: [],
+    conversation: null
 })
 
 export const fetchResources = createAsyncThunk("slice/fetchResources", () => {
@@ -17,6 +18,12 @@ export const fetchResources = createAsyncThunk("slice/fetchResources", () => {
 
 export const fetchAllUsers = createAsyncThunk("slice/fetchAllUsers", () => {
     return fetch("/users")
+        .then(r => r.json())
+        .then(r => r)
+})
+
+export const fetchConversation = createAsyncThunk("slice/fetchConversation", (id) => {
+    return fetch(`/conversations/${id}`)
         .then(r => r.json())
         .then(r => r)
 })
@@ -45,6 +52,13 @@ const slice = createSlice({
         },
         [fetchAllUsers.fulfilled](state, action) {
             state.allUsers = action.payload
+            state.status = "idle"
+        },
+        [fetchConversation.pending](state){
+            state.status = "loading"
+        },
+        [fetchConversation.fulfilled](state, action){
+            state.conversation = action.payload
             state.status = "idle"
         }
 

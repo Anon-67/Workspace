@@ -23,7 +23,9 @@ const slice = createSlice({
     initialState: initialState,
     reducers: {
         messageReceived(state, action) {
-            const message = action.payload
+            action.payload.message["user"] = action.payload.user
+            console.log(action.payload.message)
+            const message = action.payload.message
             state.messages.push(message)
         }
     },

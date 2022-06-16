@@ -7,7 +7,7 @@ import store from './store';
 import actionCable from 'actioncable'
 
 const CableApp = {}
-CableApp.cable = actionCable.createConsumer("wss://localhost:3000/cable")
+CableApp.cable = actionCable.createConsumer("stefan-workspace.herokuapp.com")
 export const ActionCableContext = createContext()
 
 

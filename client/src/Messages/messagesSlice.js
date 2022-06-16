@@ -24,7 +24,6 @@ const slice = createSlice({
     reducers: {
         messageReceived(state, action) {
             const message = action.payload
-
             state.messages.push(message)
         }
     },

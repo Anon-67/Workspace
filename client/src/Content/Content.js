@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "../Admin/Admin";
 import LandingPage from "../LandingPage/LandingPage";
 import Conversation from "../Messages/Conversation";
-import Messages from "../Messages/Messages";
+import ConversationsList from "../Messages/ConversationsList";
 import NewProjectPage from "../Projects/NewProjectPage";
 import ProjectPage from "../Projects/ProjectPage";
 import ProjectsList from "../Projects/ProjectsList";
@@ -28,7 +28,7 @@ function Content() {
                             <Route path="/" element={<LandingPage />} />
                             <Route path="workprojects" element={<ProjectsList clarification="work" />} />
                             <Route path="personalprojects" element={<ProjectsList clarification="personal" />} />
-                            <Route path="messages" element={<Messages />} />
+                            <Route path="messages" element={<ConversationsList />} />
                             <Route path="resources" element={<Resources />} />
                             {user.is_admin ? <Route path="admin" element={<Admin />} /> : null}
                             <Route path="projects/:id" element={<ProjectPage />} />

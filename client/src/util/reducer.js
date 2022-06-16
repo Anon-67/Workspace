@@ -1,18 +1,25 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 
-export const fetchResources = createAsyncThunk("messages/fetchResources", () => {
+const sliceAdapter = createEntityAdapter()
+const initialState = sliceAdapter.getInitialState({
+    status: "idle",
+    user: null,
+    adminProject: null,
+    resources: [],
+    allUsers: []
+})
+
+export const fetchResources = createAsyncThunk("slice/fetchResources", () => {
     return fetch("/resources")
         .then(r => r.json())
         .then(r => r)
 })
 
-
-const initialState = {
-    status: "idle",
-    user: null,
-    adminProject: null,
-    resources: []
-}
+export const fetchAllUsers = createAsyncThunk("slice/fetchAllUsers", () => {
+    return fetch("/users")
+        .then(r => r.json())
+        .then(r => r)
+})
 
 const slice = createSlice({
     name: 'slice',
@@ -26,15 +33,21 @@ const slice = createSlice({
         }
     },
     extraReducers: {
-        extraReducers:{
-            [fetchResources.pending](state) {
-                state.status = "loading"
-            },
-            [fetchResources.fulfilled](state, action){
-                state.resources = action.payload;
-                state.status = "idle"
-            }
+        [fetchResources.pending](state) {
+            state.status = "loading"
+        },
+        [fetchResources.fulfilled](state, action) {
+            state.resources = action.payload;
+            state.status = "idle"
+        },
+        [fetchAllUsers.pending](state) {
+            state.status = "loading"
+        },
+        [fetchAllUsers.fulfilled](state, action) {
+            state.allUsers = action.payload
+            state.status = "idle"
         }
+
     }
 })
 

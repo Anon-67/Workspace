@@ -31,7 +31,8 @@ function Content() {
                             <Route path="messages" element={<ConversationsList />} />
                             <Route path="resources" element={<Resources />} />
                             {user.is_admin ? <Route path="admin" element={<Admin />} /> : null}
-                            <Route path="projects/:id" element={<ProjectPage />} />
+                            <Route path="workprojects/projects/:id" element={<ProjectPage />} />
+                            <Route path="personalprojects/projects/:id" element={<ProjectPage />} />
                             <Route path="admin/projects/:id" element={<ProjectPage admin={true} />} />
                             <Route path="/adminnewproject" element={<NewProjectPage admin={true} />} />
                             <Route path="/newpersonalproject" element={<NewProjectPage admin={false} />} />

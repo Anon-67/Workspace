@@ -40,7 +40,6 @@ function ProjectsList({ clarification }) {
         }
     })
 
-    console.log(projects.length)
 
 
     return (

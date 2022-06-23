@@ -32,7 +32,10 @@ function ProjectPage({ admin }) {
     useEffect(() => {
         fetch(`/projects/${id}`)
             .then(r => r.json())
-            .then(r => setProject(r))
+            .then(r => {
+                console.log(id)
+                setProject(r)
+            })
     }, [id])
 
 

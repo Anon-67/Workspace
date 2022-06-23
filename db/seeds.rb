@@ -7,11 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-10.times {User.create(username: Faker::Name.unique.first_name, password: "password", password_confirmation: "password", is_admin: false)}
-
-10.times {Project.create(project_name: Faker::Hipster.sentence(word_count: 3), is_personal: false)}
+10.times {User.create(username: Faker::Name.unique.first_name, password: "password", password_confirmation: "password", is_admin: true)}
 
 
-
-User.create(username: "username", password: "password", password_confirmation: "password", is_admin: true)
-
+Resource.create(body: "https://www.linkedin.com/in/stefan-inman/", user_id: 1)
+Resource.create(body: "https://github.com/Anon-67", user_id: 1)
+Resource.create(body: "https://developer.mozilla.org/en-US/", user_id: 1)
+Resource.create(body: "https://leetcode.com/", user_id: 1)
+Resource.create(body: "https://www.hackerrank.com/", user_id: 1)
+Resource.create(body: "https://stackoverflow.com/", user_id: 1)

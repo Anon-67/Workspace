@@ -134,7 +134,7 @@ function ProjectPage({ admin }) {
                 </div>
 
                 <form onSubmit={handleAddNote}>
-                    <input className="note-form" value={note} onChange={e => setNote(e.target.value)}></input>
+                    <input placeholder="Leave a note..." className="note-form" value={note} onChange={e => setNote(e.target.value)}></input>
 
                 </form>
 

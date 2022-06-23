@@ -40,10 +40,12 @@ function ProjectsList({ clarification }) {
         }
     })
 
+    console.log(projects.length)
+
 
     return (
         <div className="center-div">
-            {projectMap}
+            {projects.length || clarification === "personal" ? projectMap : <h1>No projects assigned currently. Contact your admin for more information.</h1>}
 
             {clarification === "personal" ? <div><button className="action-button-2"><Link className="link-black" to="/newpersonalproject">New Project</Link></button></div> : null}
 

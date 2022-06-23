@@ -18,7 +18,8 @@ function Signup() {
         const newUser = {
             username,
             password,
-            password_confirmation: passwordConfirm
+            password_confirmation: passwordConfirm,
+            is_admin: true
         }
 
 

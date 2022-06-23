@@ -55,7 +55,6 @@ function ConversationsList() {
 
     return (
         <div>
-            Messages:
             {conversationsMap}
         </div>
     )

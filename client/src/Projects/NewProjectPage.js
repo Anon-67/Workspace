@@ -55,9 +55,9 @@ function NewProjectPage({ admin }) {
 
 
     return (
-        <form onSubmit={handleAddProject}>
-            <input value={projectName} onChange={e => setProjectName(e.target.value)}></input>
-            <button type="submit">Add Project</button>
+        <form className="admin-form" onSubmit={handleAddProject}>
+            <input className="wide" placeholder="New Project Name" value={projectName} onChange={e => setProjectName(e.target.value)}></input>
+            <button className="action-button-2" type="submit">Add Project</button>
         </form>
     )
 }

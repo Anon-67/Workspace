@@ -9,7 +9,7 @@ function Contributors() {
 
 
     useEffect(() => {
-        fetch(`http://localhost:4000/projects/projectusers/${id}`)
+        fetch(`/projects/projectusers/${id}`)
             .then(r => r.json())
             .then(r => setUsers(r))
     }, [id])

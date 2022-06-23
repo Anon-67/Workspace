@@ -20,7 +20,6 @@ function Admin() {
 
     return (
         <>
-            <div>ADMIN</div>
             {adminProjectsMap}
             <div>
                 <button className="action-button-2">
